@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Builder
@@ -26,8 +25,4 @@ public class Category {
 
     @Column(name = "active")
     private Boolean active;
-
-//    @JoinColumn(name = "product_id")
-//    @OneToMany(cascade = CascadeType.ALL)
-//    private List<Product> products;
 }

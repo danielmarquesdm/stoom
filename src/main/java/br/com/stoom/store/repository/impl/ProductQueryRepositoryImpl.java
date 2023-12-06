@@ -4,7 +4,6 @@ import br.com.stoom.store.model.Product;
 import br.com.stoom.store.model.ProductRequestParams;
 import br.com.stoom.store.repository.ProductQueryRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
