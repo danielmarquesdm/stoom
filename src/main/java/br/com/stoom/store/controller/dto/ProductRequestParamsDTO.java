@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class ProductRequestParamsDTO {
     private String brand;
     private String category;
+    private boolean active;
     private int page;
     private int size;
 
@@ -20,6 +21,7 @@ public class ProductRequestParamsDTO {
         return ProductRequestParams.builder()
                 .brand(paramsDTO.getBrand())
                 .category(paramsDTO.getCategory())
+                .active(paramsDTO.active)
                 .page(paramsDTO.getPage())
                 .size(paramsDTO.getSize())
                 .build();

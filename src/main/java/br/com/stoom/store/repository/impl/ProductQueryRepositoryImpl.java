@@ -39,6 +39,9 @@ public class ProductQueryRepositoryImpl implements ProductQueryRepository {
             predicates.add(categoryPredicate);
         }
 
+        Predicate activePredicate = builder.equal(root.get("active"), params.isActive());
+        predicates.add(activePredicate);
+
         criteriaQuery.where(predicates.toArray(new Predicate[0]));
 
         TypedQuery<Product> query = manager.createQuery(criteriaQuery);

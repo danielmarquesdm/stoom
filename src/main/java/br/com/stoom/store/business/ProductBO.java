@@ -47,4 +47,13 @@ public class ProductBO implements IProductBO {
         });
     }
 
+    @Override
+    public void delete(Long id) {
+        Optional<Product> found = productRepository.findById(id);
+        found.ifPresent(f -> {
+            f.setActive(false);
+            productRepository.save(f);
+        });
+    }
+
 }

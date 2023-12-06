@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class ProductRequestParams {
     private String brand;
     private String category;
+    private boolean active;
     private int page;
     private int size;
 }

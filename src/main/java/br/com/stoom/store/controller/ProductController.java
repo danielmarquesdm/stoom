@@ -29,12 +29,14 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<List<ProductResponseDTO>> findAll(@RequestParam(value = "brand", required = false) String brand,
-                                                 @RequestParam(value = "category", required = false) String category,
-                                                 @RequestParam(value = "page", required = false, defaultValue = "0") int page,
-                                                 @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
+                                                            @RequestParam(value = "category", required = false) String category,
+                                                            @RequestParam(value = "active", required = false, defaultValue = "true") boolean active,
+                                                            @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+                                                            @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
         ProductRequestParamsDTO paramsDTO = ProductRequestParamsDTO.builder()
                 .brand(brand)
                 .category(category)
+                .active(active)
                 .page(page)
                 .size(size)
                 .build();
@@ -43,9 +45,15 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductResponseDTO> update(@PathVariable(value = "id") Long id,
-                                                     @RequestBody ProductRequestDTO request) {
+    public ResponseEntity<Void> update(@PathVariable(value = "id") Long id,
+                                       @RequestBody ProductRequestDTO request) {
         productBO.update(id, request);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable(value = "id") Long id) {
+        productBO.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
