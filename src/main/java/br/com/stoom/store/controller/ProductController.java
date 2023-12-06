@@ -42,4 +42,11 @@ public class ProductController {
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductResponseDTO> update(@PathVariable(value = "id") Long id,
+                                                     @RequestBody ProductRequestDTO request) {
+        productBO.update(id, request);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }
