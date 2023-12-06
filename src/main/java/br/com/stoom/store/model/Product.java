@@ -1,7 +1,17 @@
 package br.com.stoom.store.model;
 
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import java.math.BigDecimal;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Product {
     @Id
@@ -12,4 +22,18 @@ public class Product {
 
     @Column(name = "sku")
     private String sku;
+
+    @JoinColumn(name = "category_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Category category;
+
+    @JoinColumn(name = "brand_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Brand brand;
+
+    @Column(name = "price")
+    private BigDecimal price;
+
+    @Column(name = "active")
+    private Boolean active;
 }

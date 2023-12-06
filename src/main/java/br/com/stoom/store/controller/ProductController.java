@@ -1,7 +1,7 @@
 package br.com.stoom.store.controller;
 
 import br.com.stoom.store.business.ProductBO;
-import br.com.stoom.store.model.Product;
+import br.com.stoom.store.controller.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,16 +14,32 @@ import java.util.List;
 @RequestMapping("/api/products")
 public class ProductController {
 
-    @Autowired
-    private ProductBO productService;
+    private final ProductBO productBO;
 
-    @GetMapping(value = "/")
-    public ResponseEntity<List<Product>> findAll() {
-        List<Product> p = productService.findAll();
-        if(!p.isEmpty())
-            return new ResponseEntity<>(p, HttpStatus.OK);
-        else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @Autowired
+    public ProductController(ProductBO productBO) {
+        this.productBO = productBO;
+    }
+
+    @PostMapping
+    public ResponseEntity<ProductResponseDTO> create(@RequestBody ProductRequestDTO productRequestDTO) {
+        ProductResponseDTO product = productBO.create(ProductRequestDTO.fromRequest(productRequestDTO));
+        return new ResponseEntity<>(product, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProductResponseDTO>> findAll(@RequestParam(value = "brand", required = false) String brand,
+                                                 @RequestParam(value = "category", required = false) String category,
+                                                 @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+                                                 @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
+        ProductRequestParamsDTO paramsDTO = ProductRequestParamsDTO.builder()
+                .brand(brand)
+                .category(category)
+                .page(page)
+                .size(size)
+                .build();
+        List<ProductResponseDTO> products = productBO.findAll(ProductRequestParamsDTO.fromRequest(paramsDTO));
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
 }
