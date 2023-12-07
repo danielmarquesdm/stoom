@@ -1,6 +1,5 @@
 package br.com.stoom.store.controller.dto;
 
-import br.com.stoom.store.model.Brand;
 import br.com.stoom.store.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

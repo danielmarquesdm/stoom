@@ -10,22 +10,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BrandDTO {
-    private Long id;
+public class BrandRequestDTO {
     private String name;
     private Boolean active;
 
-    public static Brand fromRequest(BrandDTO brand) {
+    public static Brand fromRequest(BrandRequestDTO brand) {
         return Brand.builder()
                 .name(brand.getName())
                 .active(brand.getActive())
-                .build();
-    }
-
-    public static BrandDTO toResponse(Brand brand) {
-        return BrandDTO.builder()
-                .id(brand.getId())
-                .name(brand.getName())
                 .build();
     }
 }
