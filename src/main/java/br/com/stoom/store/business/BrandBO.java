@@ -29,14 +29,10 @@ public class BrandBO implements IBrandBO {
 
     @Override
     public BrandDTO create(Brand brand) {
-        Brand changed = changeStringToUpperCase(brand);
-        Brand saved = brandRepository.save(changed);
+        Brand saved = brandRepository.save(brand.toBuilder()
+                .name(brand.getName().toUpperCase())
+                .build());
         return BrandDTO.toResponse(saved);
-    }
-
-    private static Brand changeStringToUpperCase(Brand brand) {
-        String name = brand.getName();
-        return brand.toBuilder().name(name.toUpperCase()).build();
     }
 
     @Override
@@ -52,8 +48,9 @@ public class BrandBO implements IBrandBO {
 
         found.ifPresent(f -> {
             BeanUtils.copyProperties(request, f);
-            Brand changed = changeStringToUpperCase(f);
-            brandRepository.save(changed);
+            brandRepository.save(f.toBuilder()
+                    .name(f.getName().toUpperCase())
+                    .build());
         });
     }
 

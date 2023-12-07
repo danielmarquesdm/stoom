@@ -28,8 +28,7 @@ public class BrandQueryRepository implements IBrandQueryRepository {
             specification = hasBrandWithName(params.getBrand());
         }
 
-        List<Brand> all = brandRepository.findAll(specification);
-        return all;
+        return brandRepository.findAll(specification);
     }
 
     private Specification<Brand> hasBrandWithName(String name) {
