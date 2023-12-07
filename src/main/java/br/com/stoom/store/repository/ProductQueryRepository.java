@@ -1,10 +1,10 @@
-package br.com.stoom.store.repository.impl;
+package br.com.stoom.store.repository;
 
 import br.com.stoom.store.model.Brand;
 import br.com.stoom.store.model.Category;
 import br.com.stoom.store.model.Product;
 import br.com.stoom.store.model.ProductRequestParams;
-import br.com.stoom.store.repository.ProductRepository;
+import br.com.stoom.store.repository.interfaces.IProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
@@ -13,13 +13,13 @@ import javax.persistence.criteria.Join;
 import java.util.List;
 
 @Repository
-public class ProductQueryImpl {
+public class ProductQueryRepository {
 
-    private final ProductRepository productRepository;
+    private final br.com.stoom.store.repository.interfaces.IProductRepository IProductRepository;
 
     @Autowired
-    public ProductQueryImpl(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductQueryRepository(IProductRepository IProductRepository) {
+        this.IProductRepository = IProductRepository;
     }
 
     public List<Product> findAllBy(ProductRequestParams params) {
@@ -33,7 +33,7 @@ public class ProductQueryImpl {
             specification = specification.and(hasProductWithCategoryName(params.getCategory()));
         }
 
-        return productRepository.findAll(specification);
+        return IProductRepository.findAll(specification);
     }
 
     private Specification<Product> hasProductWithBrandName(String brandName) {

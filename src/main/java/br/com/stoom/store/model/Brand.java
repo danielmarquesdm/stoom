@@ -21,4 +21,7 @@ public class Brand {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "active")
+    private Boolean active;
 }
