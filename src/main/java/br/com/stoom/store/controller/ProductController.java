@@ -57,4 +57,10 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @PostMapping("/{id}")
+    public ResponseEntity<Void> activate(@PathVariable(value = "id") Long id) {
+        productBO.activate(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }

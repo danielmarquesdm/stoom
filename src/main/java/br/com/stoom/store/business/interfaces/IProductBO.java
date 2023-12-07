@@ -16,4 +16,6 @@ public interface IProductBO {
     void update(Long id, ProductRequestDTO request);
 
     void delete(Long id);
+
+    void activate(Long id);
 }
