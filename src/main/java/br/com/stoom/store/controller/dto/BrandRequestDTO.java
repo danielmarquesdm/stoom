@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BrandRequestDTO {
     private String name;
-    private Boolean active;
+    private boolean active;
 
     public static Brand fromRequest(BrandRequestDTO brand) {
         return Brand.builder()
                 .name(brand.getName())
-                .active(brand.getActive())
+                .active(brand.isActive())
                 .build();
     }
 }

@@ -13,13 +13,13 @@ import lombok.NoArgsConstructor;
 public class CategoryDTO {
     private Long id;
     private String name;
-    private Boolean active;
+    private boolean active;
 
     public static CategoryDTO toResponse(Category category) {
         return CategoryDTO.builder()
                 .id(category.getId())
                 .name(category.getName())
-                .active(category.getActive())
+                .active(category.isActive())
                 .build();
     }
 
@@ -27,7 +27,7 @@ public class CategoryDTO {
         return Category.builder()
                 .id(category.getId())
                 .name(category.getName())
-                .active(category.getActive())
+                .active(category.isActive())
                 .build();
     }
 }

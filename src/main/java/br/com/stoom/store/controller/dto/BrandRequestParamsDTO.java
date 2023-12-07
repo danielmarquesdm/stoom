@@ -19,7 +19,7 @@ public class BrandRequestParamsDTO {
     public static BrandRequestParams fromRequest(BrandRequestParamsDTO paramsDTO) {
         return BrandRequestParams.builder()
                 .brand(paramsDTO.getBrand())
-                .active(paramsDTO.active)
+                .active(paramsDTO.isActive())
                 .page(paramsDTO.getPage())
                 .size(paramsDTO.getSize())
                 .build();

@@ -18,7 +18,7 @@ public class ProductResponseDTO {
     private CategoryDTO category;
     private BrandDTO brand;
     private BigDecimal price;
-    private Boolean active;
+    private boolean active;
 
     public static ProductResponseDTO toResponse(Product product) {
         return ProductResponseDTO.builder()
@@ -27,7 +27,7 @@ public class ProductResponseDTO {
                 .category(CategoryDTO.toResponse(product.getCategory()))
                 .brand(BrandDTO.toResponse(product.getBrand()))
                 .price(product.getPrice())
-                .active(product.getActive())
+                .active(product.isActive())
                 .build();
     }
 }

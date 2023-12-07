@@ -24,5 +24,5 @@ public class Category {
     private String name;
 
     @Column(name = "active")
-    private Boolean active;
+    private boolean active;
 }

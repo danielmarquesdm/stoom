@@ -13,12 +13,12 @@ import lombok.NoArgsConstructor;
 public class BrandDTO {
     private Long id;
     private String name;
-    private Boolean active;
+    private boolean active;
 
     public static Brand fromRequest(BrandDTO brand) {
         return Brand.builder()
                 .name(brand.getName())
-                .active(brand.getActive())
+                .active(brand.isActive())
                 .build();
     }
 
@@ -26,6 +26,7 @@ public class BrandDTO {
         return BrandDTO.builder()
                 .id(brand.getId())
                 .name(brand.getName())
+                .active(brand.isActive())
                 .build();
     }
 }

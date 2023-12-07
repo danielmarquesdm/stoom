@@ -1,7 +1,9 @@
 package br.com.stoom.store.controller;
 
 import br.com.stoom.store.business.interfaces.IBrandBO;
-import br.com.stoom.store.controller.dto.*;
+import br.com.stoom.store.controller.dto.BrandDTO;
+import br.com.stoom.store.controller.dto.BrandRequestDTO;
+import br.com.stoom.store.controller.dto.BrandRequestParamsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

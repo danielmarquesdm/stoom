@@ -18,7 +18,7 @@ public class ProductRequestDTO {
     private CategoryDTO category;
     private BrandDTO brand;
     private BigDecimal price;
-    private Boolean active;
+    private boolean active;
 
     public static Product fromRequest(ProductRequestDTO request) {
         return Product.builder()
@@ -26,7 +26,7 @@ public class ProductRequestDTO {
                 .category(CategoryDTO.fromRequest(request.getCategory()))
                 .brand(BrandDTO.fromRequest(request.getBrand()))
                 .price(request.getPrice())
-                .active(request.getActive())
+                .active(request.isActive())
                 .build();
     }
 }

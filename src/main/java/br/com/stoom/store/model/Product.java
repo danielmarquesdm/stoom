@@ -38,5 +38,5 @@ public class Product {
     private BigDecimal price;
 
     @Column(name = "active")
-    private Boolean active;
+    private boolean active;
 }
