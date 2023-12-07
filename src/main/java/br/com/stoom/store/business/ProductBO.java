@@ -18,18 +18,18 @@ import java.util.stream.Collectors;
 @Service
 public class ProductBO implements IProductBO {
 
-    private final IProductRepository IProductRepository;
-    private final ProductQueryRepository productQuery;
+    private final IProductRepository productRepository;
+    private final ProductQueryRepository productQueryRepository;
 
     @Autowired
-    public ProductBO(IProductRepository IProductRepository, ProductQueryRepository productQuery) {
-        this.IProductRepository = IProductRepository;
-        this.productQuery = productQuery;
+    public ProductBO(IProductRepository productRepository, ProductQueryRepository productQueryRepository) {
+        this.productRepository = productRepository;
+        this.productQueryRepository = productQueryRepository;
     }
 
     @Override
     public List<ProductResponseDTO> findAll(ProductRequestParams params) {
-        return productQuery.findAllBy(params).stream()
+        return productQueryRepository.findAllBy(params).stream()
                 .map(ProductResponseDTO::toResponse)
                 .collect(Collectors.toList());
     }
@@ -40,35 +40,35 @@ public class ProductBO implements IProductBO {
         String brandName = product.getBrand().getName();
         product.getCategory().setName(categoryName.toUpperCase());
         product.getBrand().setName(brandName.toUpperCase());
-        Product saved = IProductRepository.save(product);
+        Product saved = productRepository.save(product);
         return ProductResponseDTO.toResponse(saved);
     }
 
     @Override
     public void update(Long id, ProductRequestDTO request) {
-        Optional<Product> found = IProductRepository.findById(id);
+        Optional<Product> found = productRepository.findById(id);
 
         found.ifPresent(f -> {
             BeanUtils.copyProperties(request, f);
-            IProductRepository.save(f);
+            productRepository.save(f);
         });
     }
 
     @Override
     public void delete(Long id) {
-        Optional<Product> found = IProductRepository.findById(id);
+        Optional<Product> found = productRepository.findById(id);
         found.ifPresent(f -> {
             f.setActive(false);
-            IProductRepository.save(f);
+            productRepository.save(f);
         });
     }
 
     @Override
     public void activate(Long id) {
-        Optional<Product> found = IProductRepository.findById(id);
+        Optional<Product> found = productRepository.findById(id);
         found.ifPresent(f -> {
             f.setActive(true);
-            IProductRepository.save(f);
+            productRepository.save(f);
         });
     }
 }
